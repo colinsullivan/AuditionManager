@@ -46,6 +46,13 @@ class Actor(models.Model):
       WIDTH = 800
       return '<img src="'+self.image.url+'" height="'+str(SCALE*HEIGHT)+'" width="'+str(SCALE*WIDTH)+'" />'
     thumbnail_img_tag.allow_tags = True
+    
+    def most_recent_audition_tag(self):
+      mostRecentAudition = self.audition_set.all().order_by('-date')[0]
+      print "mostRecentAudition:\n"+str(mostRecentAudition)
+      
+      return '<div class="most_recent_audition"><div class="most_recent_audition_header">'+mostRecentAudition.date_text()+'</div><div class="most_recent_audition_content">'+mostRecentAudition.notes+'</div>'
+    most_recent_audition_tag.allow_tags = True
 
 class Audition(models.Model):
     """An audition by someone"""
@@ -58,7 +65,10 @@ class Audition(models.Model):
     
 
     def __unicode__(self):
-      return str(self.actor)+' on '+self.date.strftime('%B %d, %Y at %I:%M %p')
+      return str(self.actor)+' on '+self.date_text()
+    
+    def date_text(self):
+      return self.date.strftime('%B %d, %Y at %I:%M %p')
     
     def notes_excerpt(self):
       notes = self.notes

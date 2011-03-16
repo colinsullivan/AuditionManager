@@ -51,7 +51,7 @@ class AuditionInline(admin.StackedInline):
   
 
 class ActorAdmin(admin.ModelAdmin):
-  list_display = ('first_name', 'last_name', 'city', 'state', 'age_range', 'thumbnail_img_tag')
+  list_display = ('first_name', 'last_name', 'city', 'state', 'age_range', 'thumbnail_img_tag', 'most_recent_audition_tag')
   inlines = [
     AuditionInline,
   ]

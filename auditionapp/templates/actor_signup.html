@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load form_fields %}
+
+{% block content %}
+<form>
+    <div class="form_container">
+        {% actor_form_field signupForm.first_name %}
+        
+        {% actor_form_field signupForm.last_name %}
+        
+        {% actor_form_field addressFormset.line1 %}
+        
+        {% actor_form_field addressFormset.line2 %}
+
+        {% actor_form_field addressFormset.city %}
+
+        {% actor_form_field addressFormset.state %}
+
+        {% actor_form_field addressFormset.zipcode %}
+
+        {% actor_form_field addressFormset.phone %}
+
+        {% actor_form_field addressFormset.alt_phone %}
+
+        {% actor_form_field addressFormset.email %}
+
+        {% actor_form_field signupForm.age_range %}
+        
+        {% actor_form_field signupForm.height %}
+        
+        {% actor_form_field signupForm.size %}
+        
+        {% actor_form_field signupForm.union %}
+        
+        {% actor_form_field signupForm.special %}
+        
+        {% actor_form_field signupForm.reference %}
+        
+    </div>
+    
+    {# stuff django needs #}
+    <input type="hidden" name="address_set-TOTAL_FORMS" value="1" id="id_address_set-TOTAL_FORMS" />
+    <input type="hidden" name="address_set-INITIAL_FORMS" value="0" id="id_address_set-INITIAL_FORMS" />
+    <input type="hidden" name="address_set-MAX_NUM_FORMS" value="1" id="id_address_set-MAX_NUM_FORMS" />
+</form>
+{% endblock %}

@@ -8,7 +8,7 @@ from auditionapp.admin import admin_site
 
 urlpatterns = patterns('',
     # Example:
-#    (r'^auditions/', include('auditionapp.auditions.urls')),
+    (r'^actorsignup/', 'auditions.views.actorsignup'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

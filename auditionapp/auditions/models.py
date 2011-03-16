@@ -41,10 +41,14 @@ class Actor(models.Model):
         return ('Actor', [self.id])
     
     def thumbnail_img_tag(self):
-      SCALE = 0.25
-      HEIGHT = 600
-      WIDTH = 800
-      return '<img src="'+self.image.url+'" height="'+str(SCALE*HEIGHT)+'" width="'+str(SCALE*WIDTH)+'" />'
+      if self.image:
+        
+        SCALE = 0.25
+        HEIGHT = 600
+        WIDTH = 800
+        return '<img src="'+self.image.url+'" height="'+str(SCALE*HEIGHT)+'" width="'+str(SCALE*WIDTH)+'" />'
+      else:
+        return 'None'
     thumbnail_img_tag.allow_tags = True
     
     def most_recent_audition_tag(self):

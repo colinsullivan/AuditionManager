@@ -17,16 +17,8 @@ admin_site.register(User)
 admin_site.register(ProductionType)
 admin_site.register(Production)
 
-# Show addresses inline for actors
-class AddressInline(admin.StackedInline):
-  model = Address
-  max_num = 1
-  exclude = ('latitude', 'longitude')
-
 class ActorAdmin(admin.ModelAdmin):
-  inlines = [
-    AddressInline,
-  ]
+  pass
   
 # Allow administration of actors and auditions
 admin_site.register(Actor, ActorAdmin)

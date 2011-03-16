@@ -3,29 +3,28 @@
 {% load form_fields %}
 
 {% block content %}
-<h4 class="top_message">Please enter your audition information:</h4>
 
-<form>
+<form method="POST">
     <div class="form_container">
         {% actor_form_field signupForm.first_name %}
         
         {% actor_form_field signupForm.last_name %}
         
-        {% actor_form_field addressFormset.line1 %}
+        {% actor_form_field signupForm.line1 %}
         
-        {% actor_form_field addressFormset.line2 %}
+        {% actor_form_field signupForm.line2 %}
 
-        {% actor_form_field addressFormset.city %}
+        {% actor_form_field signupForm.city %}
 
-        {% actor_form_field addressFormset.state %}
+        {% actor_form_field signupForm.state %}
 
-        {% actor_form_field addressFormset.zipcode %}
+        {% actor_form_field signupForm.zipcode %}
 
-        {% actor_form_field addressFormset.phone %}
+        {% actor_form_field signupForm.phone %}
 
-        {% actor_form_field addressFormset.alt_phone %}
+        {% actor_form_field signupForm.alt_phone %}
 
-        {% actor_form_field addressFormset.email %}
+        {% actor_form_field signupForm.email %}
 
         {% actor_form_field signupForm.age_range %}
         
@@ -39,11 +38,12 @@
         
         {% actor_form_field signupForm.reference %}
         
+        <input type="submit" name="submit" value="Submit" />
+
     </div>
     
     {# stuff django needs #}
-    <input type="hidden" name="address_set-TOTAL_FORMS" value="1" id="id_address_set-TOTAL_FORMS" />
-    <input type="hidden" name="address_set-INITIAL_FORMS" value="0" id="id_address_set-INITIAL_FORMS" />
-    <input type="hidden" name="address_set-MAX_NUM_FORMS" value="1" id="id_address_set-MAX_NUM_FORMS" />
+    {% csrf_token %}
+    
 </form>
 {% endblock %}

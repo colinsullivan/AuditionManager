@@ -1,7 +1,13 @@
 <div class="form_label_and_field">
-    <p class="form_label">
+    <p class="form_label {% if formField.errors %}error_label{% endif %}">
         {{formField.label}}:
     </p>
+    {% if formField.errors %}
+        <p class="form_field_error">
+            {{formField.errors.as_text}}
+        </p>
+    {% endif %}
+    
     <p class="form_field">
         {{formField}}
     </p>

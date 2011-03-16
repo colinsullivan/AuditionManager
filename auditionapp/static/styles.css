@@ -28,3 +28,10 @@ p.form_label {
 p.form_field {
     margin-top: 0;
 }
+
+p.form_field_error {
+    font-size: 0.8em;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #08C930;
+}

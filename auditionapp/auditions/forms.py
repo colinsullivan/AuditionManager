@@ -2,19 +2,25 @@ from django import forms
 from django.forms import ModelForm
 from django.forms.models import inlineformset_factory, BaseModelFormSet
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.localflavor.us.forms import USStateSelect, USZipCodeField
+from django.contrib.localflavor.us.forms import USStateSelect, USZipCodeField, USPhoneNumberField
 
 
-from auditions.models import Actor, Address
+from auditions.models import Actor
 
 class ActorSignupForm(ModelForm):
   """A form that allows an actor to signup"""
-#  age_range = models.IntegerField(max_length=1, choices=AGE_CHOICES)
-#  height = models.CharField(max_length=128)
-#  size = models.CharField(max_length=128)
-#  union = models.CharField(max_length=128)
-#  special = models.TextField(blank=None)
-#  reference = models.TextField(blank=None)
+  line1 = forms.CharField(max_length = 128, label=_('Address line 1'), 
+    widget=forms.TextInput(attrs={'size': '40'})
+  )
+  line2 = forms.CharField(max_length = 128, label=_('Address line 2'), 
+    required=False,
+    widget=forms.TextInput(attrs={'size': '40'})
+  )
+  city = forms.CharField(max_length = 128, label=_('City'))
+  state = USStateSelect()
+  zipcode = USZipCodeField()
+  phone = USPhoneNumberField(label=_('Phone (xxx-xxx-xxxx)'))
+
   
   
   class Meta:
@@ -27,23 +33,3 @@ class ActorSignupForm(ModelForm):
     self.fields['union'].label = _('Union or Non-Union? (SAG, AFTRA, etc.)')
     self.fields['special'].label = _('Special Abilities')
     self.fields['reference'].label = _('How did you hear about us? (Include talent agency if applicable)')
-    
-
-
-class AddressForm(ModelForm):
-  line1 = forms.CharField(max_length = 128, label=_('Address line 1'), 
-    widget=forms.TextInput(attrs={'size': '40'}))
-  line2 = forms.CharField(max_length = 128, label=_('Address line 2'), 
-    required=False,
-    widget=forms.TextInput(attrs={'size': '40'})
-  )
-  city = forms.CharField(max_length = 128, label=_('City'))
-  state = USStateSelect()
-  zipcode = USZipCodeField()
-  phone = forms.CharField(label=_('Phone (xxx-xxx-xxxx)'))
-  
-  class Meta:
-    exclude = ('latitude', 'longitude')
-    
-    
-ActorSignupAddressFormset = inlineformset_factory(Actor, Address, max_num=1, form=AddressForm, can_delete=False)

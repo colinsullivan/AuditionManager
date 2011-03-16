@@ -5,7 +5,7 @@ class ProductionType(models.Model):
     name = models.CharField(max_length=128,help_text="Enter the name for this production type.")
 
     def __unicode__(self):
-        return u"ProductionType"
+        return self.name
 
     @models.permalink
     def get_absolute_url(self):
@@ -19,7 +19,7 @@ class Production(models.Model):
     
 
     def __unicode__(self):
-        return u"Production"
+        return self.name
 
     @models.permalink
     def get_absolute_url(self):

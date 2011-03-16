@@ -33,7 +33,7 @@ class Actor(models.Model):
 
 
     def __unicode__(self):
-        return u"Actor"
+        return self.first_name+' '+self.last_name
 
     @models.permalink
     def get_absolute_url(self):
@@ -50,7 +50,7 @@ class Audition(models.Model):
     
 
     def __unicode__(self):
-        return u"Actor"
+        return str(self.actor)+' on '+str(self.date)
 
     @models.permalink
     def get_absolute_url(self):

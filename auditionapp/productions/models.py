@@ -14,7 +14,7 @@ class ProductionType(models.Model):
 class Production(models.Model):
     """Something that someone can apply for"""
     name = models.CharField(max_length=128)
-    prodType = models.ForeignKey(ProductionType, help_text="Please select the type of production")
+    production_type = models.ForeignKey(ProductionType, help_text="Please select the type of production")
 
     
 

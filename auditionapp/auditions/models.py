@@ -50,7 +50,15 @@ class Audition(models.Model):
     
 
     def __unicode__(self):
-        return str(self.actor)+' on '+str(self.date)
+      return str(self.actor)+' on '+str(self.date)
+    
+    def notes_excerpt(self):
+      notes = self.notes
+      if len(notes) > 50:
+        # Return first 47, plus '...'
+        return notes[:47]+'...'
+      else:
+        return notes
 
     @models.permalink
     def get_absolute_url(self):

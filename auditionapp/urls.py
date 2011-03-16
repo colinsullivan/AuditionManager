@@ -10,7 +10,8 @@ from auditionapp.admin import admin_site
 urlpatterns = patterns('',
     # Example:
     (r'^actorsignup/', 'auditions.views.actorsignup'),
-
+    (r'^actorphoto/(?P<actor_id>\d+)$', 'auditions.views.actorphoto'),
+    
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
@@ -22,5 +23,7 @@ urlpatterns = patterns('',
 # Let django serve static files (for now)
 urlpatterns += patterns('', 
   (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-          {'document_root': settings.STATIC_ROOT})
+          {'document_root': settings.STATIC_ROOT}),
+  (r'^media/(?P<path>.*)$', 'django.views.static.serve',
+          {'document_root': settings.MEDIA_ROOT})
 )

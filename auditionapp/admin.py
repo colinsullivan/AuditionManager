@@ -18,7 +18,7 @@ admin_site.register(ProductionType)
 admin_site.register(Production)
 
 class ActorAdmin(admin.ModelAdmin):
-  list_display = ('first_name', 'last_name', 'city', 'state', 'age_range')
+  list_display = ('first_name', 'last_name', 'city', 'state', 'age_range', 'thumbnail_img_tag')
   
 # Allow administration of actors and auditions
 admin_site.register(Actor, ActorAdmin)

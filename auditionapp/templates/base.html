@@ -5,13 +5,19 @@
         <title>Synthetic Cinema Audition Database</title>
         
         <link rel="stylesheet" href="/static/styles.css" />
+
+        <script src="/static/js/jquery.min.js"></script>
+        
+    	<script src="/static/js/jpegcam/htdocs/webcam.js"></script>
+    	
+    	<script src="/static/js/AnimatedDots.js"></script>
     </head>
     
     <body>
         
         <img src="/static/images/header.png" class="header_image">
         
-        <h4 class="top_message">{{ message }}</h4>
+        <h4 id="top_message" class="top_message">{{ message }}</h4>
         
         {% block content %}
         {% endblock %}

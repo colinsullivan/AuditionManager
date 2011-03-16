@@ -29,7 +29,8 @@ class Actor(models.Model):
     zipcode = models.CharField(max_length=10)
     phone = PhoneNumberField()
     alt_phone = PhoneNumberField(blank=True)
-    email = models.EmailField()    
+    email = models.EmailField()
+    image = models.ImageField(upload_to='actorpics', null=True, blank=True)
 
 
     def __unicode__(self):
@@ -38,6 +39,13 @@ class Actor(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('Actor', [self.id])
+    
+    def thumbnail_img_tag(self):
+      SCALE = 0.25
+      HEIGHT = 600
+      WIDTH = 800
+      return '<img src="'+self.image.url+'" height="'+str(SCALE*HEIGHT)+'" width="'+str(SCALE*WIDTH)+'" />'
+    thumbnail_img_tag.allow_tags = True
 
 class Audition(models.Model):
     """An audition by someone"""

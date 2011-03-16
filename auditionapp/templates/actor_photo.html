@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="photo_controls_container">
+    <button id="ready_button">Click here when ready</button>
+    <button id="continue_button">Continue</button>
+    <button id="undo_button">Undo</button>
+    <div id="photo_controls_loading">
+        Loading<span id="photo_controls_loading_dots"></span>
+    </div>
+    <div id="photo_controls_success_notification">
+        Switching back to signup form in <span id="photo_controls_success_notification_countdown">5</span> seconds<span id="success_notification_loading_dots"></span>
+    </div>
+</div>
+
+<div id="photo_container">
+    
+</div>
+
+
+
+<script>
+    $(document).ready(function(){
+        
+        webcam.set_swf_url('/static/js/jpegcam/htdocs/webcam.swf');
+        webcam.set_api_url( window.location.href );
+		webcam.set_quality( 90 ); // JPEG quality (1 - 100)
+		webcam.set_shutter_sound( true, '/static/js/jpegcam/htdocs/shutter.mp3' ); // play shutter click sound
+	    /* Put webcam image on page */
+		$('#photo_container').html(webcam.get_html(800, 600));
+		
+		
+		/* When webcam has loaded */
+		webcam.set_hook('onLoad', function() {
+
+    		/* Hide continue and undo buttons */
+    		$('#continue_button').hide();
+    		$('#undo_button').hide();
+    		/* Hide loading notification */
+    		$('#photo_controls_loading').hide();
+		    $('#photo_controls_success_notification').hide();
+
+    		/* When ready button is clicked */
+    		$('#ready_button').click(function() {
+
+    		    /* Take picture */
+    		    webcam.freeze();
+
+    		    /* Remove ready button and replace with "continue" and "undo" buttons */
+    		    $('#ready_button').hide();
+    		    $('#continue_button').show();
+    		    $('#undo_button').show();
+    		    
+
+    		    /* When continue button is clicked */
+    		    $('#continue_button').click(function() {
+    		        /* Hide buttons */
+    		        $('#continue_button').hide();
+    		        $('#undo_button').hide();
+
+    		        /* Change to "Please wait" */
+    		        $('#photo_controls_loading').show();
+    		        /* Turn on animated dots */
+    		        var dots = new AnimatedDots({
+    		            container: $('#photo_controls_loading_dots')
+    		        });
+    		        dots.start();
+
+    		        /* Handle photo uploading here */
+    		        webcam.upload();
+    		    });
+
+    		    /* When undo button is clicked */
+    		    $('#undo_button').click(function() {
+    		        /* Reset webcam */
+    		        webcam.reset();
+
+    		        /* Hide undo/continue buttons */
+    		        $('#continue_button').hide();
+    		        $('#undo_button').hide();
+
+    		        /* Show ready button */
+    		        $('#ready_button').show();
+    		    });
+		    });	
+		});
+		
+		webcam.set_hook('onComplete', function() {
+		    /* Change header message */
+		    $('#top_message').html('Signup is complete.  Thank you!')
+		    /* Hide loading notifications */
+		    $('#photo_controls_loading').hide();
+		    /* Hide photo */
+		    $('#photo_container').hide();
+		    /* Show success notification */
+		    $('#photo_controls_success_notification').show();
+		    
+		    /* Start countdown to redirect */
+		    setInterval(function() {
+		        var cur = $('#photo_controls_success_notification_countdown').html();
+		        if(cur == 0) {
+		            window.location = '../../actorsignup/';
+		        }
+		        else {
+    		        $('#photo_controls_success_notification_countdown').html(cur-1);		            
+		        }
+		    }, 1000);
+		});
+    });
+</script>
+{% endblock %}

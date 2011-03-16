@@ -58,7 +58,7 @@ class Audition(models.Model):
     
 
     def __unicode__(self):
-      return str(self.actor)+' on '+str(self.date)
+      return str(self.actor)+' on '+self.date.strftime('%B %d, %Y at %I:%M %p')
     
     def notes_excerpt(self):
       notes = self.notes

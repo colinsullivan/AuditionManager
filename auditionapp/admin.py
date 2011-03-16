@@ -17,13 +17,16 @@ admin_site.register(User)
 admin_site.register(ProductionType)
 admin_site.register(Production)
 
+
+class AuditionInline(admin.StackedInline):
+  model = Audition
+  extra = 1
+
 class ActorAdmin(admin.ModelAdmin):
   list_display = ('first_name', 'last_name', 'city', 'state', 'age_range', 'thumbnail_img_tag')
+  inlines = [
+    AuditionInline,
+  ]
   
 # Allow administration of actors and auditions
 admin_site.register(Actor, ActorAdmin)
-
-class AuditionAdmin(admin.ModelAdmin):
-  list_display = ('actor', 'production', 'date', 'notes_excerpt')
-
-admin_site.register(Audition, AuditionAdmin)

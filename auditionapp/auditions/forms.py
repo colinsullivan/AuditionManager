@@ -31,11 +31,16 @@ class ActorSignupForm(ModelForm):
 
 
 class AddressForm(ModelForm):
-  line1 = forms.CharField(max_length = 128, label=_('Address line 1'))
-  line2 = forms.CharField(max_length = 128, label=_('Address line 2'), required=False)
+  line1 = forms.CharField(max_length = 128, label=_('Address line 1'), 
+    widget=forms.TextInput(attrs={'size': '40'}))
+  line2 = forms.CharField(max_length = 128, label=_('Address line 2'), 
+    required=False,
+    widget=forms.TextInput(attrs={'size': '40'})
+  )
   city = forms.CharField(max_length = 128, label=_('City'))
   state = USStateSelect()
   zipcode = USZipCodeField()
+  phone = forms.CharField(label=_('Phone (xxx-xxx-xxxx)'))
   
   class Meta:
     exclude = ('latitude', 'longitude')

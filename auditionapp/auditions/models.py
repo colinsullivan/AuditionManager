@@ -49,7 +49,7 @@ class Actor(models.Model):
 
 class Audition(models.Model):
     """An audition by someone"""
-    production = models.ForeignKey(Production)
+    production = models.ForeignKey(Production, help_text="Defaults to whichever production has 'Default production' set.")
     actor = models.ForeignKey(Actor)
     date = models.DateTimeField(auto_now_add=True)
     notes = models.TextField()

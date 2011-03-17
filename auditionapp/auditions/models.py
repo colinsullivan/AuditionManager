@@ -30,7 +30,7 @@ class Actor(models.Model):
     phone = PhoneNumberField()
     alt_phone = PhoneNumberField(blank=True)
     email = models.EmailField()
-    image = models.ImageField(upload_to='actorpics', null=True, blank=True)
+    image = models.ImageField(upload_to='actorpics', null=True, blank=True, default='actorpics/default.jpg')
 
 
     def __unicode__(self):
@@ -41,21 +41,23 @@ class Actor(models.Model):
         return ('Actor', [self.id])
     
     def thumbnail_img_tag(self):
-      if self.image:
-        
-        SCALE = 0.25
-        HEIGHT = 600
-        WIDTH = 800
-        return '<img src="'+self.image.url+'" height="'+str(SCALE*HEIGHT)+'" width="'+str(SCALE*WIDTH)+'" />'
-      else:
-        return 'None'
+      SCALE = 0.25
+      HEIGHT = 600
+      WIDTH = 800
+      return '<img src="'+self.image.url+'" height="'+str(SCALE*HEIGHT)+'" width="'+str(SCALE*WIDTH)+'" />'
     thumbnail_img_tag.allow_tags = True
     
     def most_recent_audition_tag(self):
-      mostRecentAudition = self.audition_set.all().order_by('-date')[0]
-      print "mostRecentAudition:\n"+str(mostRecentAudition)
+      auditions = self.audition_set.all()
+      # If this actor has auditions
+      if auditions.count():
+        # Get most recent
+        mostRecentAudition = auditions.order_by('-date')[0]
       
-      return '<div class="most_recent_audition"><div class="most_recent_audition_header">'+mostRecentAudition.date_text()+'</div><div class="most_recent_audition_content">'+mostRecentAudition.notes+'</div>'
+        return '<div class="most_recent_audition"><div class="most_recent_audition_header">'+mostRecentAudition.date_text()+'</div><div class="most_recent_audition_content">'+mostRecentAudition.notes+'</div>'
+      else:
+        # No auditions
+        return 'No auditions'
     most_recent_audition_tag.allow_tags = True
 
 class Audition(models.Model):

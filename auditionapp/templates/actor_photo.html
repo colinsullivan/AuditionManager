@@ -28,7 +28,7 @@
 		webcam.set_quality( 90 ); // JPEG quality (1 - 100)
 		webcam.set_shutter_sound( true, '/static/js/jpegcam/htdocs/shutter.mp3' ); // play shutter click sound
 	    /* Put webcam image on page */
-		$('#photo_container').html(webcam.get_html(800, 600));
+		$('#photo_container').html(webcam.get_html(640, 480));
 		
 		
 		/* When webcam has loaded */

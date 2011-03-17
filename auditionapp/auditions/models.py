@@ -42,8 +42,8 @@ class Actor(models.Model):
     
     def thumbnail_img_tag(self):
       SCALE = 0.25
-      HEIGHT = 600
-      WIDTH = 800
+      WIDTH = 640
+      HEIGHT = 480
       return '<img src="'+self.image.url+'" height="'+str(SCALE*HEIGHT)+'" width="'+str(SCALE*WIDTH)+'" />'
     thumbnail_img_tag.allow_tags = True
     

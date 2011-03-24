@@ -45,7 +45,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/Users/colin/Projects/AuditionManager/auditionapp/media/'
+MEDIA_ROOT = '/Applications/MAMP/htdocs/sci-audition/AuditionManager/auditionapp/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -54,7 +54,7 @@ MEDIA_URL = '/media/'
 
 # Absolute path to the directory that holds static files.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/Users/colin/Projects/AuditionManager/auditionapp/static/'
+STATIC_ROOT = '/Applications/MAMP/htdocs/sci-audition/AuditionManager/auditionapp/static/'
 
 # URL that handles the static files served from STATIC_ROOT.
 # Example: "http://media.lawrence.com/static/"

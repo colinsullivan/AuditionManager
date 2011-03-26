@@ -21,7 +21,7 @@ class Actor(models.Model):
     size = models.CharField(max_length=128)
     union = models.CharField(max_length=128)
     special = models.TextField(blank=None)
-    reference = models.TextField(blank=None)
+    reference = models.TextField(blank=True, null=True)
     line1 = models.CharField(max_length = 128)
     line2 = models.CharField(max_length = 128, blank=True)
     city = models.CharField(max_length = 128)
